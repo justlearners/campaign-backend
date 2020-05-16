@@ -1,0 +1,459 @@
+{
+	"id": "e4be7400-2b98-48ed-fa28-2d53fbd2f4fd",
+	"name": "dj",
+	"description": "",
+	"order": [
+		"addfc973-acb3-afec-a69d-27f955443067",
+		"75bf0097-7460-af85-d64f-b53bcbe89d32",
+		"f90adf6a-93c6-6258-500e-1193050284a4",
+		"12af4aeb-1abc-ed6f-5a6e-01b77c4a6b5b",
+		"021d7bc2-af6c-256c-2834-416c9ca0a883",
+		"98ed53b6-c417-525d-bde0-4a4bebb948e6",
+		"83d90ca3-e934-1216-0637-1fd3cc7eef6d",
+		"a2361588-3537-bb3c-36a5-48b3d4ae217f",
+		"f677b173-fea1-a50a-55e3-0a01a2a59ad9",
+		"93e6ad2e-b106-726e-2537-3e2908819f52",
+		"09ab417f-46c3-7eb7-0cf4-e0c8869a373c",
+		"f8c10228-3fa7-ef74-02ab-f13982938211",
+		"2540b6f9-0e34-9310-021b-da637df600a3",
+		"aa948ac0-0f3c-b061-2c3a-818f55358564"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1589019246290,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "021d7bc2-af6c-256c-2834-416c9ca0a883",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:8085/saveUser",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "user",
+					"value": "{\"uname\": \"user1\",\n\"emailid\":\"abc@gmail.com\",\n\"contact\":\"11111111111\",\n\"address\":  \"addr1\",\n\"city\":\"city1\",\n\"country\":\"country1\",\n\"createdBy\": \"Anuj\"\n}",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1589618873299,
+			"name": "saveUser",
+			"description": "",
+			"collectionId": "e4be7400-2b98-48ed-fa28-2d53fbd2f4fd",
+			"responses": []
+		},
+		{
+			"id": "09ab417f-46c3-7eb7-0cf4-e0c8869a373c",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8085/campaignDetails?cid=1",
+			"queryParams": [
+				{
+					"key": "cid",
+					"value": "1",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1589623348174,
+			"name": "getCampaign",
+			"description": "",
+			"collectionId": "e4be7400-2b98-48ed-fa28-2d53fbd2f4fd",
+			"responses": []
+		},
+		{
+			"id": "12af4aeb-1abc-ed6f-5a6e-01b77c4a6b5b",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:8085/saveConfig",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "config",
+					"value": "{\"categ\": \"slot\",\n\"key\":\"slot4\",\n\"val\":\"9-10AM\",\n\"createdBy\": \"Anuj\"\n}",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1589626344250,
+			"name": "saveConfig",
+			"description": "",
+			"collectionId": "e4be7400-2b98-48ed-fa28-2d53fbd2f4fd",
+			"responses": []
+		},
+		{
+			"id": "2540b6f9-0e34-9310-021b-da637df600a3",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8085/bookingsWithUser?cid=2",
+			"queryParams": [
+				{
+					"key": "cid",
+					"value": "2",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1589623357787,
+			"name": "getBookingsWithUser",
+			"description": "",
+			"collectionId": "e4be7400-2b98-48ed-fa28-2d53fbd2f4fd",
+			"responses": []
+		},
+		{
+			"id": "75bf0097-7460-af85-d64f-b53bcbe89d32",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:8085/saveCampaignType",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "campaignTyp",
+					"value": "{\"name\": \"Y/N Campaign \"}",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1589173359701,
+			"name": "saveCompaignType",
+			"description": "",
+			"collectionId": "e4be7400-2b98-48ed-fa28-2d53fbd2f4fd",
+			"responses": []
+		},
+		{
+			"id": "83d90ca3-e934-1216-0637-1fd3cc7eef6d",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:8085/saveCampaignGroup",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "cmpgngrp",
+					"value": "{\"cid\": \"2\",\n\"gid\":\"2\"\n}",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1589622421254,
+			"name": "saveCampaignGrp",
+			"description": "",
+			"collectionId": "e4be7400-2b98-48ed-fa28-2d53fbd2f4fd",
+			"responses": []
+		},
+		{
+			"id": "93e6ad2e-b106-726e-2537-3e2908819f52",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8085/slotList",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1589626203480,
+			"name": "slotList",
+			"description": "",
+			"collectionId": "e4be7400-2b98-48ed-fa28-2d53fbd2f4fd",
+			"responses": []
+		},
+		{
+			"id": "98ed53b6-c417-525d-bde0-4a4bebb948e6",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:8085/saveBooking",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "booking",
+					"value": "{\"cid\": \"2\",\n\"uid\":\"2\",\n\"slot\":  \"addr1\",\n\"createdBy\": \"Anuj\"\n}",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1589621071269,
+			"name": "saveBooking",
+			"description": "",
+			"collectionId": "e4be7400-2b98-48ed-fa28-2d53fbd2f4fd",
+			"responses": []
+		},
+		{
+			"id": "a2361588-3537-bb3c-36a5-48b3d4ae217f",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8085/getData",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1589020047009,
+			"name": "localhost:3000/getData",
+			"description": "",
+			"collectionId": "e4be7400-2b98-48ed-fa28-2d53fbd2f4fd",
+			"responses": []
+		},
+		{
+			"id": "aa948ac0-0f3c-b061-2c3a-818f55358564",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8085/bookingFullDetails?cid=2",
+			"queryParams": [
+				{
+					"key": "cid",
+					"value": "2",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1589625888996,
+			"name": "getBookingFullDetails",
+			"description": "",
+			"collectionId": "e4be7400-2b98-48ed-fa28-2d53fbd2f4fd",
+			"responses": []
+		},
+		{
+			"id": "addfc973-acb3-afec-a69d-27f955443067",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:8085/saveGroup",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "group",
+					"value": "{\"name\": \"Digambar Jain\",\"active\":\"y\"}",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1589095676277,
+			"name": "saveGroup",
+			"description": "",
+			"collectionId": "e4be7400-2b98-48ed-fa28-2d53fbd2f4fd",
+			"responses": []
+		},
+		{
+			"id": "f677b173-fea1-a50a-55e3-0a01a2a59ad9",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8085/campaignList",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1589622482369,
+			"name": "getCampaignList",
+			"description": "",
+			"collectionId": "e4be7400-2b98-48ed-fa28-2d53fbd2f4fd",
+			"responses": []
+		},
+		{
+			"id": "f8c10228-3fa7-ef74-02ab-f13982938211",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8085/bookings?cid=2",
+			"queryParams": [
+				{
+					"key": "cid",
+					"value": "2",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1589623145741,
+			"name": "getBookings",
+			"description": "",
+			"collectionId": "e4be7400-2b98-48ed-fa28-2d53fbd2f4fd",
+			"responses": []
+		},
+		{
+			"id": "f90adf6a-93c6-6258-500e-1193050284a4",
+			"headers": "Content-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:8085/saveCampaign",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "campaign",
+					"value": "{\"name\": \"campaign name 1\",\n\"typeId\":\"1\",\n\"shortDesc\":\"Campaign for Namokar Mantra 2\",\n\"createdBy\": \"Anuj\"\n}",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "urlencoded",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1589622444464,
+			"name": "saveCompaign",
+			"description": "",
+			"collectionId": "e4be7400-2b98-48ed-fa28-2d53fbd2f4fd",
+			"responses": []
+		}
+	]
+}
