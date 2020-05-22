@@ -121,8 +121,8 @@ saveConfig : function(config){
                 if (err) {
                     reject({ status: "error", message: err.message});
                 } else {
-                    resolve("success");
-                    console.log("Number of records inserted: " + result.affectedRows);
+                    resolve(result.insertId);
+                    console.log("Records inserted: " + result.affectedRows);
                 }                
             });
       });
@@ -133,18 +133,26 @@ saveConfig : function(config){
             var bid=uuidv1();
             console.log('bid--',bid);
             console.log("Connected!");
-            var sql = "INSERT INTO booking (cid,uid,booking_date,slot,created_by) VALUES ?";
-            var values = [
-                [booking.cid,booking.uid,booking.booking_date,booking.slot,booking.createdBy]
-            ];
-            con.query(sql, [values], function (err, result) {
-                if (err) {
-                    reject({ status: "error", message: err.message});
-                } else {
-                    resolve("success");
-                    console.log("Number of records inserted: " + result.affectedRows);
-                }                
-            });
+            var uid=saveUsr(booking.user).
+                then(function(uid){ 
+                    console.log('uid--',uid);           
+                        var sql = "INSERT INTO booking (cid,uid,booking_date,slot,created_by) VALUES ?";
+                        var values = [
+                            [booking.cid,uid,booking.booking_date,booking.slot,booking.createdBy]
+                        ];
+                        con.query(sql, [values], function (err, result) {
+                            if (err) {
+                                reject({ status: "error", message: err.message});
+                            } else {
+                                resolve("success");
+                                console.log("Number of records inserted: " + result.affectedRows);
+                            }                
+                        });
+                    })
+                    .catch(function (err) {
+                        console.log(err);
+                        reject({ status: "error", message: err.message});
+            });           
       });
  },
 
@@ -240,3 +248,23 @@ saveConfig : function(config){
       });
  }
 }
+
+function saveUsr(user){
+    return new Promise(function (resolve, reject) {
+            var uid=uuidv1();
+            console.log('uid--',uid);
+            console.log("Connected!");
+            var sql = "INSERT INTO user (uname,emailid,contact,address,city,country,created_by) VALUES ?";
+            var values = [
+                [user.uname,user.emailid,user.contact,user.address,user.city,user.country,user.createdBy]
+            ];
+            con.query(sql, [values], function (err, result) {
+                if (err) {
+                    reject({ status: "error", message: err.message});
+                } else {
+                    resolve(result.insertId);
+                    console.log("Records inserted: " + result.affectedRows);
+                }                
+            });
+      });
+ }

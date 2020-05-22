@@ -126,38 +126,11 @@ app.post('/saveCampaignType',(req, res) => {
       } 
   })
 
-  app.post('/saveUser',(req, res) => {
-    try {
-      console.log('saveUser invoked--',req.body.user);
-      var user={};
-      user=JSON.parse(req.body.user);      
-      db.saveUser(user).
-          then(function(data){ 
-              console.log('data--',data);           
-              res.status(200);
-              res.send(data);
-              })
-          .catch(function (err) {
-            console.log(err);
-            res.statusMessage = err.message;
-            res.status(500);
-            res.send(err.message);
-            res.end();
-           });
-     }
-      catch (err) {
-      console.log("error occurred: ",err);
-      res.statusMessage = err.message;
-      res.status(500);
-      res.end();
-      } 
-  })
-
   app.post('/saveBooking',(req, res) => {
     try {
       console.log('saveBooking invoked--',req.body.booking);
       var booking={};
-      booking=JSON.parse(req.body.booking);      
+      booking=JSON.parse(req.body.booking); 
       db.saveBooking(booking).
           then(function(data){ 
               console.log('data--',data);           
