@@ -1,7 +1,10 @@
 const express = require('express')
 const app = express()
+var cors = require('cors');
+
 //const bodyParser = require('body-parser')
 app.use(express.urlencoded())
+app.use(cors());
 
 const db = require('./db.js');
 
