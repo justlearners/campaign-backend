@@ -133,7 +133,7 @@ saveConfig : function(config){
             var bid=uuidv1();
             console.log('bid--',bid);
             console.log("Connected!");
-            var uid=saveUsr(booking.user).
+            var uid=saveUsr(booking.usr).
                 then(function(uid){ 
                     console.log('uid--',uid);           
                         var sql = "INSERT INTO booking (cid,uid,booking_date,slot,created_by) VALUES ?";

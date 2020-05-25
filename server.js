@@ -1,9 +1,14 @@
 const express = require('express')
 const app = express()
 var cors = require('cors');
+var path = require('path');
 
-//const bodyParser = require('body-parser')
-app.use(express.urlencoded())
+var dir = path.join(__dirname, 'public');
+app.use(express.static(dir));
+//app.use(express.urlencoded())
+app.use(express.urlencoded());
+app.use(express.json());
+
 app.use(cors());
 
 const db = require('./db.js');
@@ -129,11 +134,14 @@ app.post('/saveCampaignType',(req, res) => {
       } 
   })
 
-  app.post('/saveBooking',(req, res) => {
+  app.post('/saveBooking',(req, res,next) => {
     try {
       console.log('saveBooking invoked--',req.body.booking);
+      console.log('saveBooking invoked--',req.body);
+
       var booking={};
-      booking=JSON.parse(req.body.booking); 
+      booking=req.body; 
+      console.log('booking--',booking);
       db.saveBooking(booking).
           then(function(data){ 
               console.log('data--',data);           
