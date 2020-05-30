@@ -144,7 +144,7 @@ saveConfig : function(config){
                             if (err) {
                                 reject({ status: "error", message: err.message});
                             } else {
-                                resolve("success");
+                                resolve({ status: "success", message: "success"});
                                 console.log("Number of records inserted: " + result.affectedRows);
                             }                
                         });

@@ -144,7 +144,7 @@ app.post('/saveCampaignType',(req, res) => {
       console.log('booking--',booking);
       db.saveBooking(booking).
           then(function(data){ 
-              console.log('data--',data);           
+              console.log('data123--',data);           
               res.status(200);
               res.send(data);
               })
