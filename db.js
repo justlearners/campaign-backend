@@ -5,7 +5,7 @@ var mysql = require('mysql');
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "test",
+  password: "password",
   database: "campaign"
 });
 
@@ -235,7 +235,7 @@ saveConfig : function(config){
     return new Promise(function (resolve, reject) {
             console.log("Connected!",cid);
             var sql = "SELECT b.*,u.*,config.config_key,config.config_value FROM booking b,user u,app_config config where b.cid =? "+
-                     " and b.uid=u.uid and b.slot=config.id";  
+                     " and b.uid=u.uid and b.slot=config.id order by b.booking_date";  
             var values = [cid];          
             con.query(sql,[values],function (err, result) {
                 if (err) {
