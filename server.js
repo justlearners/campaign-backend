@@ -6,9 +6,6 @@ var path = require('path');
 var dir = path.join(__dirname, 'public');
 app.use(express.static(dir));
 
-var dir2 = path.join(__dirname, 'public/newCampaign');
-app.use(express.static(dir2));
-
 //app.use(express.urlencoded())
 app.use(express.urlencoded());
 app.use(express.json());
@@ -16,6 +13,13 @@ app.use(express.json());
 app.use(cors());
 
 const db = require('./db.js');
+
+function getUiPath(req, res) {
+  res.sendFile(path.resolve('./public/angular/index.html'));
+}
+
+app.get('/campaignd/*', getUiPath);
+
 
 app.get('/', (req, res) => {
     res.send('Welcome to Node API')
