@@ -222,6 +222,33 @@ app.post('/saveCampaignType',(req, res) => {
       res.end();
       } 
   })
+
+  app.get('/stateList',(req, res) => {
+    try {
+      console.log('stateList invoked--',req.query.countryId);
+      var cntryId=req.query.cntryId;
+      db.getStateList(cntryId).
+          then(function(data){ 
+              console.log('data--',data);           
+              res.status(200);
+              res.send(data);
+              })
+          .catch(function (err) {
+            console.log(err);
+            res.statusMessage = err.message;
+            res.status(500);
+            res.send(err.message);
+            res.end();
+           });
+     }
+      catch (err) {
+      console.log("error occurred: ",err);
+      res.statusMessage = err.message;
+      res.status(500);
+      res.end();
+      } 
+  })
+
   app.get('/campaignList',(req, res) => {
     try {
       console.log('campaignList invoked--');

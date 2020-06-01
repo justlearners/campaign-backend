@@ -171,6 +171,22 @@ saveConfig : function(config){
       });
  },
 
+ getStateList : function(cntryId){
+    return new Promise(function (resolve, reject) {
+            console.log("Connected!");
+            var sql = "SELECT * FROM state_list where country_id=?";  
+            var values = [cntryId];   
+            con.query(sql,[values],function (err, result) {
+                if (err) {
+                    reject({ status: "error", message: err.message});
+                } else {
+                    resolve(result);
+                    console.log("Data: " + result);
+                }                
+            });
+      });
+ },
+
  getCampaignList : function(){
     return new Promise(function (resolve, reject) {
             console.log("Connected!");
@@ -195,8 +211,12 @@ saveConfig : function(config){
                 if (err) {
                     reject({ status: "error", message: err.message});
                 } else {
-                    resolve(result);
-                    console.log("Data: " + result);
+                    console.log("Data rows: " + result.length);
+                    if(result.length>0) {
+                        resolve(result);
+                    }else {
+                        reject({ status: "error", message: "No Record Found"});
+                    }
                 }                
             });
       });
@@ -234,8 +254,9 @@ saveConfig : function(config){
  getBookingsFullDetails : function(cid){
     return new Promise(function (resolve, reject) {
             console.log("Connected!",cid);
-            var sql = "SELECT b.*,u.*,config.config_key,config.config_value FROM booking b,user u,app_config config where b.cid =? "+
-                     " and b.uid=u.uid and b.slot=config.id order by b.booking_date";  
+            var sql = "SELECT b.*,u.*,st.state_name,config.id,config.config_key,config.config_value FROM booking b,user u,"+
+                     " state_list st,app_config config where b.cid =? "+
+                     " and b.uid=u.uid and b.slot=config.id and u.state=st.id order by b.booking_date,config.config_key";  
             var values = [cid];          
             con.query(sql,[values],function (err, result) {
                 if (err) {
@@ -254,9 +275,9 @@ function saveUsr(user){
             var uid=uuidv1();
             console.log('uid--',uid);
             console.log("Connected!");
-            var sql = "INSERT INTO user (uname,emailid,contact,address,city,country,created_by) VALUES ?";
+            var sql = "INSERT INTO user (uname,emailid,contact,address,city,state,country,created_by) VALUES ?";
             var values = [
-                [user.uname,user.emailid,user.contact,user.address,user.city,user.country,user.createdBy]
+                [user.uname,user.emailid,user.contact,user.address,user.city,user.state,user.country,user.createdBy]
             ];
             con.query(sql, [values], function (err, result) {
                 if (err) {
