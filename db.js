@@ -190,7 +190,7 @@ saveConfig : function(config){
  getCampaignList : function(){
     return new Promise(function (resolve, reject) {
             console.log("Connected!");
-            var sql = "SELECT * FROM campaign where is_active ='y'";            
+            var sql = "SELECT * FROM campaign c where is_active ='y'";            
             con.query(sql,function (err, result) {
                 if (err) {
                     reject({ status: "error", message: err.message});
@@ -205,7 +205,12 @@ saveConfig : function(config){
  getCampaign : function(cid){
     return new Promise(function (resolve, reject) {
             console.log("Connected!",cid);
-            var sql = "SELECT * FROM campaign where cid =?";  
+            var sql = "SELECT c.*,"+
+            "(select uname from user u where u.uid=c.contact_person_id1) contact1_name, "+
+            "(select contact from user u where u.uid=c.contact_person_id1) contact1_contact, "+
+            "(select uname from user u where u.uid=c.contact_person_id1) contact2_name, "+
+            "(select contact from user u where u.uid=c.contact_person_id1) contact2_contact "+
+            " FROM campaign c where is_active ='y'";   
             var values = [cid];          
             con.query(sql,[values],function (err, result) {
                 if (err) {
