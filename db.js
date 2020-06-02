@@ -129,29 +129,44 @@ saveConfig : function(config){
  },
 
  saveBooking : function(booking){
-    return new Promise(function (resolve, reject) {
-            var bid=uuidv1();
-            console.log('bid--',bid);
-            console.log("Connected!");
-            var uid=saveUsr(booking.usr).
-                then(function(uid){ 
-                    console.log('uid--',uid);           
-                        var sql = "INSERT INTO booking (cid,uid,booking_date,slot,created_by) VALUES ?";
-                        var values = [
-                            [booking.cid,uid,booking.booking_date,booking.slot,booking.createdBy]
-                        ];
-                        con.query(sql, [values], function (err, result) {
-                            if (err) {
-                                reject({ status: "error", message: err.message});
-                            } else {
-                                resolve({ status: "success", message: "success"});
-                                console.log("Number of records inserted: " + result.affectedRows);
-                            }                
-                        });
-                    })
-                    .catch(function (err) {
-                        console.log(err);
-                        reject({ status: "error", message: err.message});
+    return new Promise(function (resolve, reject) {            
+            var uid=checkUsr(booking.usr).then(function(uid){ 
+                var uNameFound=booking.usr.uname;
+                if(!uid) {
+                    if(!uNameFound) {
+                        reject({ status: "error", message: "User not found. Please choose register option."});
+                    } else {
+                        var uid=saveUsr(booking.usr).then(function(uid) {
+                            sveBooking(booking,uid).
+                            then(function(data){
+                                resolve(data);
+                            })
+                            .catch(function (err) {
+                                reject(err);
+                            })
+                        })
+                        .catch(function (err) {
+                            console.log(err);
+                            reject({ status: "error", message: err.message});
+                        }); 
+                    }
+                } else {
+                    if(!uNameFound) {
+                        sveBooking(booking,uid).
+                            then(function(data){
+                                resolve(data);
+                            })
+                            .catch(function (err) {
+                                reject(err);
+                            })                        
+                    } else {
+                        reject({ status: "error", message: "User already existing with this contact.Please change contact or contact admin."});
+                    }
+                }      
+              })
+            .catch(function (err) {
+                console.log(err);
+                reject({ status: "error", message: err.message});
             });           
       });
  },
@@ -275,7 +290,31 @@ saveConfig : function(config){
  }
 }
 
-function saveUsr(user){
+function checkUsr(user){
+    return new Promise(function (resolve, reject) {
+            var uid=uuidv1();
+            console.log('uid--',uid);
+            console.log("Connected!");
+            var selectSql = "SELECT uid FROM user u where u.contact=?"; 
+            var value = [user.contact];
+            con.query(selectSql,[value],function (err, result) {
+                if (err) {
+                    reject({ status: "error", message: err.message});
+                } else {
+                    if(result.length>0){
+                        var data=(result[0]);
+                        console.log("User Exists: " + data);
+                        console.log("uid: " + data.uid);
+                        resolve(data.uid);
+                    } else {
+                        resolve(''); 
+                    }                    
+                }                
+            });
+      });
+ }
+
+ function saveUsr(user){
     return new Promise(function (resolve, reject) {
             var uid=uuidv1();
             console.log('uid--',uid);
@@ -294,3 +333,21 @@ function saveUsr(user){
             });
       });
  }
+
+ function sveBooking(booking,uid){
+    return new Promise(function (resolve, reject) {
+    var sql = "INSERT INTO booking (cid,uid,booking_date,slot,created_by) VALUES ?";
+    var values = [
+        [booking.cid,uid,booking.booking_date,booking.slot,booking.createdBy]
+    ];
+    con.query(sql, [values], function (err, result) {
+        if (err) {
+            reject({ status: "error", message: err.message});
+        } else {
+            resolve({ status: "success", message: "success"});
+            console.log("Number of records inserted: " + result.affectedRows);
+        }                
+    });
+ });
+}
+
