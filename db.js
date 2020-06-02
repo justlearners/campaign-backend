@@ -2,7 +2,8 @@ const { v1: uuidv1 } = require('uuid');
 
 var mysql = require('mysql');
 
-var con = mysql.createConnection({
+var con = mysql.createPool({
+  connectionLimit : 10,
   host: "localhost",
   user: "root",
   password: "password",
@@ -134,21 +135,39 @@ saveConfig : function(config){
                 var uNameFound=booking.usr.uname;
                 if(!uid) {
                     if(!uNameFound) {
-                        reject({ status: "error", message: "User not found. Please choose register option."});
+                        reject({ status: "error", message: "User not found.Please choose existing user option."});
                     } else {
-                        var uid=saveUsr(booking.usr).then(function(uid) {
-                            sveBooking(booking,uid).
-                            then(function(data){
-                                resolve(data);
+                      con.getConnection(function(err, connection) {
+
+                        connection.beginTransaction(function(err) {
+                            if (err) {
+                                reject({ status: "error", message: err.message});
+                            } 
+                            saveUsr(booking.usr,connection).then(function(uid) {
+                                sveBooking(booking,uid,connection).
+                                then(function(data){
+                                    connection.commit(function(err) {
+                                        if (err) { 
+                                            con.rollback(function() {
+                                            throw err;
+                                          });
+                                        }
+                                        console.log('Transaction Complete.');
+                                        connection.end();
+                                      });
+                                    resolve(data);
+                                })
+                                .catch(function (err) {
+                                    reject(err);
+                                })
                             })
                             .catch(function (err) {
-                                reject(err);
-                            })
-                        })
-                        .catch(function (err) {
-                            console.log(err);
-                            reject({ status: "error", message: err.message});
-                        }); 
+                                console.log(err);
+                                reject({ status: "error", message: err.message});
+                            }); 
+                            
+                        });
+                     });
                     }
                 } else {
                     if(!uNameFound) {
@@ -314,7 +333,7 @@ function checkUsr(user){
       });
  }
 
- function saveUsr(user){
+ function saveUsr(user,connection){
     return new Promise(function (resolve, reject) {
             var uid=uuidv1();
             console.log('uid--',uid);
@@ -323,9 +342,11 @@ function checkUsr(user){
             var values = [
                 [user.uname,user.emailid,user.contact,user.address,user.city,user.state,user.country,user.createdBy]
             ];
-            con.query(sql, [values], function (err, result) {
+            connection.query(sql, [values], function (err, result) {
                 if (err) {
-                    reject({ status: "error", message: err.message});
+                    connection.rollback(function() {
+                        reject({ status: "error", message: err.message});
+                      });
                 } else {
                     resolve(result.insertId);
                     console.log("Records inserted: " + result.affectedRows);
@@ -334,15 +355,17 @@ function checkUsr(user){
       });
  }
 
- function sveBooking(booking,uid){
+ function sveBooking(booking,uid,connection){
     return new Promise(function (resolve, reject) {
     var sql = "INSERT INTO booking (cid,uid,booking_date,slot,created_by) VALUES ?";
     var values = [
         [booking.cid,uid,booking.booking_date,booking.slot,booking.createdBy]
     ];
-    con.query(sql, [values], function (err, result) {
+    connection.query(sql, [values], function (err, result) {
         if (err) {
-            reject({ status: "error", message: err.message});
+            connection.rollback(function() {
+                reject({ status: "error", message: err.message});
+              });
         } else {
             resolve({ status: "success", message: "success"});
             console.log("Number of records inserted: " + result.affectedRows);
