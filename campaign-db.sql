@@ -69,7 +69,7 @@ CREATE TABLE `booking` (
   KEY `fk_booking_2_idx` (`uid`),
   CONSTRAINT `fk_booking_1` FOREIGN KEY (`cid`) REFERENCES `campaign` (`cid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_booking_2` FOREIGN KEY (`uid`) REFERENCES `user` (`uid`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,7 +78,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (2,1,3126,'2020-05-25','1',NULL,'2020-06-01 09:18:41',NULL,'2020-06-01 09:18:41'),(3,1,3127,'2020-05-28','5',NULL,'2020-06-01 09:21:25',NULL,'2020-06-01 09:21:25'),(4,1,3128,'2020-05-27','5',NULL,'2020-06-01 09:21:51',NULL,'2020-06-01 09:21:51');
+INSERT INTO `booking` VALUES (35,1,3153,'2020-05-25','5',NULL,'2020-06-03 06:06:41',NULL,'2020-06-03 06:06:41'),(36,1,3153,'2020-05-26','2',NULL,'2020-06-03 06:07:25',NULL,'2020-06-03 06:07:25'),(37,1,3154,'2020-05-27','5',NULL,'2020-06-03 06:08:33',NULL,'2020-06-03 06:08:33'),(38,1,3154,'2020-05-26','1',NULL,'2020-06-03 06:09:37',NULL,'2020-06-03 06:09:37'),(40,1,3156,'2020-05-26','3',NULL,'2020-06-03 06:11:01',NULL,'2020-06-03 06:11:01');
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +120,7 @@ CREATE TABLE `campaign` (
 
 LOCK TABLES `campaign` WRITE;
 /*!40000 ALTER TABLE `campaign` DISABLE KEYS */;
-INSERT INTO `campaign` VALUES (1,1,'णमोकार मंत्र','Test','णमोकार मन्त्र जैन धर्म का सर्वाधिक महत्वपूर्ण मन्त्र है। इसे \'नवकार मन्त्र\', \'नमस्कार मन्त्र\' या \'पंच परमेष्ठि नमस्कार\' भी कहा जाता है। इस मन्त्र में अरिहन्तों, सिद्धों, आचार्यों, उपाध्यायों और साधुओं का नमस्कार किया गया है।\n\nणमोकार महामंत्र\' एक लोकोत्तर मंत्र है। इस मंत्र को जैन धर्म का परम पवित्र और अनादि मूल मंत्र माना जाता है। इसमें किसी व्यक्ति का नहीं, किंतु संपूर्ण रूप से विकसित और विकासमान विशुद्ध आत्मस्वरूप का ही दर्शन, स्मरण, चिंतन, ध्यान एवं अनुभव किया जाता है। इसलिए यह अनादि और अक्षयस्वरूपी मंत्र है। लौकिक मंत्र आदि सिर्फ लौकिक लाभ पहुँचाते हैं, किंतु लोकोत्तर मंत्र लौकिक और लोकोत्तर दोनों कार्य सिद्ध करते हैं। इसलिए णमोकार मंत्र सर्वकार्य सिद्धिकारक लोकोत्तर मंत्र माना जाता है।','2020-05-24 18:30:00','2020-05-30 18:30:00','y','अरिहंत, सिद्ध, आचार्य को,\n शत् शत् करूँ प्रणाम।\nउपाध्याय सर्वसाधु,\nकरते सब पर कल्याण।।','dj3.jpeg','dj_footer_1.png',NULL,NULL,NULL,NULL,'2020-05-31 08:33:52',NULL,'2020-05-31 08:33:52'),(2,1,'णमोकार मंत्र का अर्थ एवं महिमा\n','Test','प्राथना करो केवल इसलिए नहीं की,\nकुछ जरूरत है,\n\nबल्कि इसलिए की~\n\nहम शुक्रगुज़ार हैं,\nभगवान की...\nजो कुछ हमारे पास है,\n\nवो बहुत कम लोगों को,\nनसीब होता है...!!!','2020-06-05 18:30:00','2020-06-14 18:30:00','y','अपने ज्ञान, ध्यान \nऔर \nउच्च आचरण द्वारा\nजैन शासन की प्रभावना करिये...','dj2.jpeg','dj_footer_1.png',NULL,NULL,NULL,NULL,'2020-05-31 08:50:42',NULL,'2020-05-31 08:50:42'),(3,1,'णमोकार मंत्र का अर्थ','Test','प्राथना करो केवल इसलिए नहीं की,\nकुछ जरूरत है,\n\nबल्कि इसलिए की~\n\nहम शुक्रगुज़ार हैं,\nभगवान की...\nजो कुछ हमारे पास है,\n\nवो बहुत कम लोगों को,\nनसीब होता है...!!!','2020-06-05 18:30:00','2020-06-14 18:30:00','y','अपने ज्ञान, ध्यान \nऔर \nउच्च आचरण द्वारा\nजैन शासन की प्रभावना करिये...','dj.jpeg','dj_footer_1.png',NULL,NULL,NULL,NULL,'2020-05-31 08:50:42',NULL,'2020-05-31 08:50:42');
+INSERT INTO `campaign` VALUES (1,1,'णमोकार मंत्र','Test','णमोकार मन्त्र जैन धर्म का सर्वाधिक महत्वपूर्ण मन्त्र है। इसे \'नवकार मन्त्र\', \'नमस्कार मन्त्र\' या \'पंच परमेष्ठि नमस्कार\' भी कहा जाता है। इस मन्त्र में अरिहन्तों, सिद्धों, आचार्यों, उपाध्यायों और साधुओं का नमस्कार किया गया है।\n\nणमोकार महामंत्र\' एक लोकोत्तर मंत्र है। इस मंत्र को जैन धर्म का परम पवित्र और अनादि मूल मंत्र माना जाता है। इसमें किसी व्यक्ति का नहीं, किंतु संपूर्ण रूप से विकसित और विकासमान विशुद्ध आत्मस्वरूप का ही दर्शन, स्मरण, चिंतन, ध्यान एवं अनुभव किया जाता है। इसलिए यह अनादि और अक्षयस्वरूपी मंत्र है। लौकिक मंत्र आदि सिर्फ लौकिक लाभ पहुँचाते हैं, किंतु लोकोत्तर मंत्र लौकिक और लोकोत्तर दोनों कार्य सिद्ध करते हैं। इसलिए णमोकार मंत्र सर्वकार्य सिद्धिकारक लोकोत्तर मंत्र माना जाता है।','2020-05-24 18:30:00','2020-05-30 18:30:00','y','अरिहंत, सिद्ध, आचार्य को,\n शत् शत् करूँ प्रणाम।\nउपाध्याय सर्वसाधु,\nकरते सब पर कल्याण।।','dj3.jpeg','dj_footer_1.png',NULL,3126,3127,'','2020-06-01 12:33:32',NULL,'2020-06-01 12:33:32'),(2,1,'णमोकार मंत्र का अर्थ एवं महिमा\n','Test','प्राथना करो केवल इसलिए नहीं की,\nकुछ जरूरत है,\n\nबल्कि इसलिए की~\n\nहम शुक्रगुज़ार हैं,\nभगवान की...\nजो कुछ हमारे पास है,\n\nवो बहुत कम लोगों को,\nनसीब होता है...!!!','2020-06-05 18:30:00','2020-06-14 18:30:00','y','अपने ज्ञान, ध्यान \nऔर \nउच्च आचरण द्वारा\nजैन शासन की प्रभावना करिये...','dj2.jpeg','dj_footer_1.png',NULL,NULL,NULL,NULL,'2020-05-31 08:50:42',NULL,'2020-05-31 08:50:42'),(3,1,'णमोकार मंत्र का अर्थ','Test','प्राथना करो केवल इसलिए नहीं की,\nकुछ जरूरत है,\n\nबल्कि इसलिए की~\n\nहम शुक्रगुज़ार हैं,\nभगवान की...\nजो कुछ हमारे पास है,\n\nवो बहुत कम लोगों को,\nनसीब होता है...!!!','2020-06-05 18:30:00','2020-06-14 18:30:00','y','अपने ज्ञान, ध्यान \nऔर \nउच्च आचरण द्वारा\nजैन शासन की प्रभावना करिये...','dj.jpeg','dj_footer_1.png',NULL,NULL,NULL,NULL,'2020-05-31 08:50:42',NULL,'2020-05-31 08:50:42');
 /*!40000 ALTER TABLE `campaign` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,7 +188,7 @@ DROP TABLE IF EXISTS `cgroup`;
 CREATE TABLE `cgroup` (
   `gid` int(11) NOT NULL AUTO_INCREMENT,
   `gname` varchar(45) NOT NULL,
-  `gparemt` int(11) DEFAULT NULL,
+  `gparent` int(11) DEFAULT NULL,
   `is_active` varchar(45) DEFAULT 'Y',
   `created_by` varchar(45) DEFAULT NULL,
   `created_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -256,7 +256,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`uid`),
   KEY `fk_user_1_idx` (`state`),
   CONSTRAINT `fk_user_1` FOREIGN KEY (`state`) REFERENCES `state_list` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3129 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3157 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -265,7 +265,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (3126,'Anuj Jain',NULL,'9810052069','T8, 802,\nPark View Residency, Sector -3','Gurugram',14,NULL,NULL,'2020-06-01 09:18:41',NULL,'2020-06-01 09:18:41'),(3127,'ffdg',NULL,'1234567890','gdsfgsd','gsdfgsd',10,NULL,NULL,'2020-06-01 09:21:24',NULL,'2020-06-01 09:21:24'),(3128,'fhfhf',NULL,'1234567890','hfghf','ghfghfdh',11,NULL,NULL,'2020-06-01 09:21:51',NULL,'2020-06-01 09:21:51');
+INSERT INTO `user` VALUES (3153,'Anuj Jain',NULL,'9810052069','T8, 802,\nPark View Residency, Sector -3','Gurugram',14,NULL,NULL,'2020-06-03 06:06:41',NULL,'2020-06-03 06:06:41'),(3154,'Anuj Jain',NULL,'9810052068','T8, 802,\nPark View Residency, Sector -3','Gurugram',14,NULL,NULL,'2020-06-03 06:08:33',NULL,'2020-06-03 06:08:33'),(3156,'Anuj Jain',NULL,'9810052067','T8, 802,\nPark View Residency, Sector -3','Gurugram',14,NULL,NULL,'2020-06-03 06:11:01',NULL,'2020-06-03 06:11:01');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -278,4 +278,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-01 16:04:48
+-- Dump completed on 2020-06-03 13:09:07
