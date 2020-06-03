@@ -135,10 +135,9 @@ saveConfig : function(config){
                 var uNameFound=booking.usr.uname;
                 if(!uid) {
                     if(!uNameFound) {
-                        reject({ status: "error", message: "User not found.Please choose existing user option."});
+                        reject({ status: "error", message: "User not found.Please choose 'New User' option."});
                     } else {
                       con.getConnection(function(err, connection) {
-
                         connection.beginTransaction(function(err) {
                             if (err) {
                                 reject({ status: "error", message: err.message});
@@ -171,7 +170,7 @@ saveConfig : function(config){
                     }
                 } else {
                     if(!uNameFound) {
-                        sveBooking(booking,uid).
+                        sveBooking(booking,uid,con).
                             then(function(data){
                                 resolve(data);
                             })
@@ -179,7 +178,7 @@ saveConfig : function(config){
                                 reject(err);
                             })                        
                     } else {
-                        reject({ status: "error", message: "User already existing with this contact.Please change contact or contact admin."});
+                        reject({ status: "error", message: "User already existing with this contact.Please change contact."});
                     }
                 }      
               })
