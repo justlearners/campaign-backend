@@ -2,7 +2,7 @@ const { v1: uuidv1 } = require('uuid');
 
 var mysql = require('mysql');
 
-var con = mysql.createPool({
+var pool = mysql.createPool({
   connectionLimit : 10,
   host: "localhost",
   user: "root",
@@ -19,7 +19,7 @@ saveConfig : function(config){
             var values = [
                 [config.categ,config.key,config.val,'y',config.createdBy]
             ];
-            con.query(sql, [values], function (err, result) {
+            pool.query(sql, [values], function (err, result) {
                 if (err) {
                     reject({ status: "error", message: err.message});
                 } else {
@@ -39,7 +39,7 @@ saveConfig : function(config){
             var values = [
                 [group.name,group.active,'admin']
             ];
-            con.query(sql, [values], function (err, result) {
+            pool.query(sql, [values], function (err, result) {
                 if (err) {
                     reject({ status: "error", message: err.message});
                 } else {
@@ -59,7 +59,7 @@ saveConfig : function(config){
             var values = [
                 [campaignTyp.name,'admin']
             ];
-            con.query(sql, [values], function (err, result) {
+            pool.query(sql, [values], function (err, result) {
                 if (err) {
                     reject({ status: "error", message: err.message});
                 } else {
@@ -78,7 +78,7 @@ saveConfig : function(config){
             var values = [
                 [campaign.typeId,campaign.name,campaign.shortDesc,'y',campaign.createdBy]
             ];
-            con.query(sql, [values], function (err, result) {
+            pool.query(sql, [values], function (err, result) {
                 if (err) {
                     reject({ status: "error", message: err.message});
                 } else {
@@ -98,7 +98,7 @@ saveConfig : function(config){
             var values = [
                 [cmpgngrp.cid,cmpgngrp.gid]
             ];
-            con.query(sql, [values], function (err, result) {
+            pool.query(sql, [values], function (err, result) {
                 if (err) {
                     reject({ status: "error", message: err.message});
                 } else {
@@ -118,7 +118,7 @@ saveConfig : function(config){
             var values = [
                 [user.uname,user.emailid,user.contact,user.address,user.city,user.country,user.createdBy]
             ];
-            con.query(sql, [values], function (err, result) {
+            pool.query(sql, [values], function (err, result) {
                 if (err) {
                     reject({ status: "error", message: err.message});
                 } else {
@@ -137,7 +137,7 @@ saveConfig : function(config){
                     if(!uNameFound) {
                         reject({ status: "error", message: "User not found.Please choose 'New User' option."});
                     } else {
-                      con.getConnection(function(err, connection) {
+                    pool.getConnection(function(err, connection) {
                         connection.beginTransaction(function(err) {
                             if (err) {
                                 reject({ status: "error", message: err.message});
@@ -157,12 +157,17 @@ saveConfig : function(config){
                                     resolve(data);
                                 })
                                 .catch(function (err) {
-                                    reject(err);
+                                    console.log(err);
+                                    connection.rollback(function() {
+                                        reject({ status: "error", message: err.message});
+                                      });                                   
                                 })
                             })
                             .catch(function (err) {
                                 console.log(err);
-                                reject({ status: "error", message: err.message});
+                                connection.rollback(function() {
+                                    reject({ status: "error", message: err.message});
+                                  });   
                             }); 
                             
                         });
@@ -170,7 +175,7 @@ saveConfig : function(config){
                     }
                 } else {
                     if(!uNameFound) {
-                        sveBooking(booking,uid,con).
+                        sveBooking(booking,uid,pool).
                             then(function(data){
                                 resolve(data);
                             })
@@ -193,7 +198,7 @@ saveConfig : function(config){
     return new Promise(function (resolve, reject) {
             console.log("Connected!");
             var sql = "SELECT * FROM app_config where config_categ ='slot'";            
-            con.query(sql,function (err, result) {
+            pool.query(sql,function (err, result) {
                 if (err) {
                     reject({ status: "error", message: err.message});
                 } else {
@@ -209,7 +214,7 @@ saveConfig : function(config){
             console.log("Connected!");
             var sql = "SELECT * FROM state_list where country_id=?";  
             var values = [cntryId];   
-            con.query(sql,[values],function (err, result) {
+            pool.query(sql,[values],function (err, result) {
                 if (err) {
                     reject({ status: "error", message: err.message});
                 } else {
@@ -225,7 +230,7 @@ saveConfig : function(config){
     return new Promise(function (resolve, reject) {
             console.log("Connected!");
             var sql = "SELECT * FROM cgroup c where is_active ='y'";            
-            con.query(sql,function (err, result) {
+            pool.query(sql,function (err, result) {
                 if (err) {
                     reject({ status: "error", message: err.message});
                 } else {
@@ -240,7 +245,7 @@ saveConfig : function(config){
     return new Promise(function (resolve, reject) {
             console.log("Connected!");
             var sql = "SELECT * FROM campaign c where is_active ='y'";            
-            con.query(sql,function (err, result) {
+            pool.query(sql,function (err, result) {
                 if (err) {
                     reject({ status: "error", message: err.message});
                 } else {
@@ -256,7 +261,7 @@ saveConfig : function(config){
             console.log("Connected!");
             var sql = "SELECT c.* FROM campaign c,campaign_group cg where c.cid=cg.cid and cg.gid='?' and c.is_active ='y'";            
             var values = [grpid];     
-            con.query(sql,function (err, result) {
+            pool.query(sql,function (err, result) {
                 if (err) {
                     reject({ status: "error", message: err.message});
                 } else {
@@ -276,7 +281,7 @@ saveConfig : function(config){
             "(select contact from user u where u.uid=c.contact_person_id1) contact2_contact "+
             " FROM campaign c where is_active ='y'";   
             var values = [cid];          
-            con.query(sql,[values],function (err, result) {
+            pool.query(sql,[values],function (err, result) {
                 if (err) {
                     reject({ status: "error", message: err.message});
                 } else {
@@ -295,7 +300,7 @@ saveConfig : function(config){
             console.log("Connected!",cid);
             var sql = "SELECT * FROM booking where cid =?";  
             var values = [cid];          
-            con.query(sql,[values],function (err, result) {
+            pool.query(sql,[values],function (err, result) {
                 if (err) {
                     reject({ status: "error", message: err.message});
                 } else {
@@ -310,7 +315,7 @@ saveConfig : function(config){
             console.log("Connected!",cid);
             var sql = "SELECT * FROM booking b,user u where b.cid =? and b.uid=u.uid";  
             var values = [cid];          
-            con.query(sql,[values],function (err, result) {
+            pool.query(sql,[values],function (err, result) {
                 if (err) {
                     reject({ status: "error", message: err.message});
                 } else {
@@ -327,7 +332,7 @@ saveConfig : function(config){
                      " state_list st,app_config config where b.cid =? "+
                      " and b.uid=u.uid and b.slot=config.id and u.state=st.id order by b.booking_date,config.config_key";  
             var values = [cid];          
-            con.query(sql,[values],function (err, result) {
+            pool.query(sql,[values],function (err, result) {
                 if (err) {
                     reject({ status: "error", message: err.message});
                 } else {
@@ -346,7 +351,7 @@ function checkUsr(user){
             console.log("Connected!");
             var selectSql = "SELECT uid FROM user u where u.contact=?"; 
             var value = [user.contact];
-            con.query(selectSql,[value],function (err, result) {
+            pool.query(selectSql,[value],function (err, result) {
                 if (err) {
                     reject({ status: "error", message: err.message});
                 } else {
@@ -374,9 +379,7 @@ function checkUsr(user){
             ];
             connection.query(sql, [values], function (err, result) {
                 if (err) {
-                    connection.rollback(function() {
-                        reject({ status: "error", message: err.message});
-                      });
+                       reject({ status: "error", message: err.message});
                 } else {
                     resolve(result.insertId);
                     console.log("Records inserted: " + result.affectedRows);
@@ -393,10 +396,8 @@ function checkUsr(user){
     ];
     connection.query(sql, [values], function (err, result) {
         if (err) {
-            connection.rollback(function() {
                 reject({ status: "error", message: err.message});
-              });
-        } else {
+         } else {
             resolve({ status: "success", message: "success"});
             console.log("Number of records inserted: " + result.affectedRows);
         }                
