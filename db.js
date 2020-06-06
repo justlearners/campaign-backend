@@ -279,7 +279,7 @@ saveConfig : function(config){
             "(select contact from user u where u.uid=c.contact_person_id1) contact1_contact, "+
             "(select uname from user u where u.uid=c.contact_person_id2) contact2_name, "+
             "(select contact from user u where u.uid=c.contact_person_id2) contact2_contact "+
-            " FROM campaign c where is_active ='y'";   
+            " FROM campaign c where is_active ='y' and cid = ?";   
             var values = [cid];          
             pool.query(sql,[values],function (err, result) {
                 if (err) {
