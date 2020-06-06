@@ -370,7 +370,7 @@ function checkUsr(user){
             console.log("Connected!");
             var sql = "INSERT INTO user (uname,emailid,contact,address,city,state,country,created_by) VALUES ?";
             var values = [
-                [user.uname,user.emailid,user.contact,user.address,user.city,user.state,user.country,user.createdBy]
+                [user.uname,user.email,user.contact,user.address,user.city,user.state,user.country,user.createdBy]
             ];
             connection.query(sql, [values], function (err, result) {
                 if (err) {
