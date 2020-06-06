@@ -277,8 +277,8 @@ saveConfig : function(config){
             var sql = "SELECT c.*,"+
             "(select uname from user u where u.uid=c.contact_person_id1) contact1_name, "+
             "(select contact from user u where u.uid=c.contact_person_id1) contact1_contact, "+
-            "(select uname from user u where u.uid=c.contact_person_id1) contact2_name, "+
-            "(select contact from user u where u.uid=c.contact_person_id1) contact2_contact "+
+            "(select uname from user u where u.uid=c.contact_person_id2) contact2_name, "+
+            "(select contact from user u where u.uid=c.contact_person_id2) contact2_contact "+
             " FROM campaign c where is_active ='y'";   
             var values = [cid];          
             pool.query(sql,[values],function (err, result) {
