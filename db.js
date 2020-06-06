@@ -220,6 +220,22 @@ saveConfig : function(config){
       });
  },
 
+
+ getGroupList : function(){
+    return new Promise(function (resolve, reject) {
+            console.log("Connected!");
+            var sql = "SELECT * FROM cgroup c where is_active ='y'";            
+            con.query(sql,function (err, result) {
+                if (err) {
+                    reject({ status: "error", message: err.message});
+                } else {
+                    resolve(result);
+                    console.log("Data: " + result);
+                }                
+            });
+      });
+ },
+
  getCampaignList : function(){
     return new Promise(function (resolve, reject) {
             console.log("Connected!");
@@ -235,6 +251,21 @@ saveConfig : function(config){
       });
  },
 
+ getCampaignListByGrp : function(grpid){
+    return new Promise(function (resolve, reject) {
+            console.log("Connected!");
+            var sql = "SELECT c.* FROM campaign c,campaign_group cg where c.cid=cg.cid and cg.gid='?' and c.is_active ='y'";            
+            var values = [grpid];     
+            con.query(sql,function (err, result) {
+                if (err) {
+                    reject({ status: "error", message: err.message});
+                } else {
+                    resolve(result);
+                    console.log("Data: " + result);
+                }                
+            });
+      });
+ },
  getCampaign : function(cid){
     return new Promise(function (resolve, reject) {
             console.log("Connected!",cid);

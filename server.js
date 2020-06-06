@@ -249,10 +249,61 @@ app.post('/saveCampaignType',(req, res) => {
       } 
   })
 
+  app.get('/groupList',(req, res) => {
+    try {
+      console.log('groupList invoked--');
+      db.getGroupList().
+          then(function(data){ 
+              console.log('data--',data);           
+              res.status(200);
+              res.send(data);
+              })
+          .catch(function (err) {
+            console.log(err);
+            res.statusMessage = err.message;
+            res.status(500);
+            res.send(err.message);
+            res.end();
+           });
+     }
+      catch (err) {
+      console.log("error occurred: ",err);
+      res.statusMessage = err.message;
+      res.status(500);
+      res.end();
+      } 
+  })
+
   app.get('/campaignList',(req, res) => {
     try {
       console.log('campaignList invoked--');
       db.getCampaignList().
+          then(function(data){ 
+              console.log('data--',data);           
+              res.status(200);
+              res.send(data);
+              })
+          .catch(function (err) {
+            console.log(err);
+            res.statusMessage = err.message;
+            res.status(500);
+            res.send(err.message);
+            res.end();
+           });
+     }
+      catch (err) {
+      console.log("error occurred: ",err);
+      res.statusMessage = err.message;
+      res.status(500);
+      res.end();
+      } 
+  })
+
+  app.get('/campaignListByGrp',(req, res) => {
+    try {
+      console.log('campaignListByGrp invoked--',req.query.gid);
+      var gid=req.query.gid;
+      db.getCampaignListByGrp(gid).
           then(function(data){ 
               console.log('data--',data);           
               res.status(200);
